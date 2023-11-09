@@ -1,28 +1,34 @@
+import { useState  } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import Slider from '@react-native-community/slider'
 
 export default function App() {
+
+  const [size, setSize] = useState(10)
+  
   return (
     <View style={styles.container}>
       <Image
         source={require('./assets/abrir-cadeado.png')}
         style={styles.logo}
       />
-      <Text style={styles.title}>Gerrador de senhas</Text>
+      <Text style={styles.title}>{size} Caracteres</Text>
 
       <View style={styles.area}>
         <Slider
           style={{height: 50}}
           minimumValue={6}
           maximumValue={20}
-          maximumTrackTintColor={'#ff0000'}
+          maximumTrackTintColor={'#FFF'}
           minimumTrackTintColor={'#000'}
           thumbTintColor='dodgerblue'
+          value={size}
+          onValueChange={(value) => setSize(value.toFixed(0))}
         />
       </View>
 
-    <TouchableOpacity>
-      <Text>Gerar senha</Text>
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>Gerar senha</Text>
     </TouchableOpacity>
 
     </View>
@@ -42,6 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     fontStyle: 'italic',
+    color: 'white'
   },
   logo: {
     width: 150,
@@ -51,9 +58,24 @@ const styles = StyleSheet.create({
   area: {
     marginTop: 14,
     marginBottom: 14,
-    padding: 8,
-    backgroundColor: '#FFF',
+    padding: 4,
+    backgroundColor: '#392de9',
     borderRadius: 8,
     width: '80%'
+  }, 
+  button: {
+    backgroundColor: '#392de9',
+    padding: 8,
+    borderRadius: 8,
+    height: 50,
+    width: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 18,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   }
 })
